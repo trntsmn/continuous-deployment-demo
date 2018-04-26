@@ -38,7 +38,11 @@ script:
 - python test_main.py
 # [START deploy]
 # Deploy the app
-- gcloud -q preview app deploy app.yaml --promote
+- echo "deploying test build to $TRAVIS_BUILD_NUMBER"
+# http://VERSION_ID.default.YOUR_PROJECT_ID.appspot.com
+# Old deploy no Preview - gcloud -q preview app deploy app.yaml --promote
+- gcloud app deploy app.yaml --no-promote
 # Run and end to end test
 - python e2e_test.py
+- glcoud app deploy app.yaml --promote
 # [END deploy]
